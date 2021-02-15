@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Message from "@/views/Message";
 import NewMessage from "@/views/NewMessage";
+import Callback from "@/components/Callback.vue";
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/message/:id',
     name: 'message',
     component: Message
+  },
+  {
+    path: '/callback',
+    name: 'Callback',
+    component: Callback
   }
 ]
 
