@@ -1,6 +1,5 @@
 <template>
     <div>
-        <Header/>
         <b-container>
             <b-row>
                 <b-col cm="6" >
@@ -23,14 +22,12 @@
 
 <script>
     import EditMessage from "@/components/EditMessage";
-    import Header from "@/components/Header";
     import ShowMessage from "@/components/ShowMessage";
     import { mapState, mapActions } from 'vuex';
 
     export default {
         name: "Message",
         components: {
-            Header,
             EditMessage,
             ShowMessage
         },

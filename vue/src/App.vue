@@ -1,30 +1,66 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <b-navbar toggleable="lg" type="dark" variant="dark">
+      <b-navbar-brand href="#">Notes</b-navbar-brand>
+      <b-navbar-nav>
         <router-link to="/">Home</router-link> |
         <router-link to="/edit">New Message</router-link>
-    </div>
-    <router-view/>
+      </b-navbar-nav>
+      <b-navbar-nav class="ml-auto">
+        <b-nav-item>
+          <b-button
+            v-if="!isLoggedIn()"
+            @click="handleLogin"
+            variant="primary"
+            class="my-2 my-sm-0"
+            type="submit"
+          >
+            Sign In
+          </b-button>
+        </b-nav-item>
+        <b-nav-item>
+          <b-button
+            v-if="isLoggedIn()"
+            @click="handleLogout"
+            variant="primary"
+            class="my-2 my-sm-0"
+            type="submit"
+          >
+            Sign Out
+          </b-button>
+        </b-nav-item>
+      </b-navbar-nav>
+    </b-navbar>
+    <router-view />
   </div>
 </template>
 
 <script>
-    import { mapActions } from 'vuex';
-
-    export default {
-        name: "App",
-        methods: {
-            ...mapActions(['load_messages'])
-        },
-        mounted: function() {
-            this.load_messages();
-        }
-    }
+import { mapActions } from "vuex";
+import { isLoggedIn, login, logout } from "@/utils/auth-service";
+export default {
+  name: "App",
+  methods: {
+    ...mapActions(["load_messages"]),
+    handleLogin() {
+      login();
+    },
+    handleLogout() {
+      logout();
+    },
+    isLoggedIn() {
+      return isLoggedIn();
+    },
+  },
+  mounted: function () {
+    this.load_messages();
+  },
+};
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
