@@ -3,19 +3,27 @@
     <b-container fluid>
         <b-row>
             <b-col sm="2">
-                <label for="user">User:</label>
+                <label for="naziv">Naziv:</label>
             </b-col>
             <b-col sm="10">
-                <p id="user" style="text-align: left">{{ message.user }}</p>
+                <p id="naziv" style="text-align: left">{{ message.naziv }}</p>
+            </b-col>
+        </b-row>
+        <b-row>
+            <b-col sm="2">
+                <label for="tracer">Tracer:</label>
+            </b-col>
+            <b-col sm="10">
+                <p id="tracer" style="text-align: left">{{ message.tracer }}</p>
             </b-col>
         </b-row>
 
         <b-row class="mt-2">
             <b-col sm="2">
-                <label for="msg">Currency:</label>
+                <label for="opis">Opis:</label>
             </b-col>
             <b-col sm="10">
-                <p id="msg" style="text-align: left">{{ message.message }}</p>
+                <p id="opis" style="text-align: left">{{ message.opis }}</p>
             </b-col>
         </b-row>
     </b-container>

@@ -1,5 +1,5 @@
 const express = require('express');
-const msgs = require('./routes/messages');  // Nas ruter (REST API)
+const valute = require('./routes/valute');  // Nas ruter (REST API)
 const history = require('connect-history-api-fallback');
 const path = require('path');
 
@@ -14,7 +14,7 @@ app.use(function(req, res, next) {
 });
 
 // Kazemo aplikaciji da za rute koje pocinju sa '/api' koristi nas ruter
-app.use('/api', msgs);
+app.use('/api', valute);
 
 const staticMiddleware = express.static(path.join(__dirname, 'dist'));
 

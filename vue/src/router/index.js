@@ -19,8 +19,8 @@ const routes = [
     component: NewCurrency
   },
   {
-    path: '/message/:id',
-    name: 'message',
+    path: '/currency/:id',
+    name: 'currency',
     component: Currency
   },
   {

@@ -6,7 +6,7 @@
                 :items="currencies"
                 :fields="fields"
                 head-variant="light"
-                @row-clicked="editMessage">
+                @row-clicked="editCurrency">
             <template v-slot:cell(action)="row">
                 <b-button variant="danger" @click="delete_currency(row.item.id)">Delete</b-button>
             </template>
@@ -20,16 +20,16 @@
     import { mapState, mapActions } from 'vuex';
 
     export default {
-        name: "MessageList",
+        name: "CurrencyList",
         computed: {
             ...mapState(['currencies'])
         },
         data() {
             return {
                 fields: [
-                    { key: 'user' },
-                    { key: 'message' },
-                    { key: 'time' },
+                    { key: 'naziv' },
+                    { key: 'tracer' },
+                    { key: 'opis' },
                     { key: 'action' }
                 ]
             }
@@ -37,8 +37,8 @@
         methods: {
             ...mapActions(['delete_currency']),
 
-            editMessage: function (item, index, event) {
-                router.push({path: `/message/${item.id}`})
+            editCurrency: function (item, index, event) {
+                router.push({path: `/currency/${item.id}`})
             }
         }
     }

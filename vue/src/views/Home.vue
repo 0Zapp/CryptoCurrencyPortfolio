@@ -1,12 +1,6 @@
 <template>
   <div class="home">
-      <b-container>
-          <b-row>
-              <b-col cm="6" >
-                  <CurrencyList/>
-              </b-col>
-          </b-row>
-      </b-container>
+    <CurrencyList />
   </div>
 </template>
 
@@ -15,9 +9,9 @@
 import CurrencyList from "@/components/CurrencyList";
 
 export default {
-    name: 'home',
-    components: {
-        CurrencyList
-    }
-}
+  name: "home",
+  components: {
+    CurrencyList,
+  },
+};
 </script>

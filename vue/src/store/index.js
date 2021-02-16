@@ -39,7 +39,7 @@ export default new Vuex.Store({
 
   actions: {
     load_currencies: function ({ commit }) {
-      fetch('http://localhost/api/poruke', { method: 'get' }).then((response) => {
+      fetch('http://localhost/api/valute', { method: 'get' }).then((response) => {
         if (!response.ok)
           throw response;
 
@@ -57,7 +57,7 @@ export default new Vuex.Store({
     },
 
     delete_currency: function({ commit }, id) {
-      fetch(`http://localhost/api/poruka/${id}`, { method: 'delete' }).then((response) => {
+      fetch(`http://localhost/api/valuta/${id}`, { method: 'delete' }).then((response) => {
         if (!response.ok)
           throw response;
 
@@ -75,7 +75,7 @@ export default new Vuex.Store({
     },
 
     new_currency: function({ commit }, message) {
-      fetch('http://localhost/api/poruke', {
+      fetch('http://localhost/api/valute', {
         method: 'post',
         headers: {
           'Content-Type': 'application/json'
@@ -99,7 +99,7 @@ export default new Vuex.Store({
     },
 
     change_currency: function({ commit }, payload) {
-      fetch(`http://localhost/api/poruka/${payload.id}`, {
+      fetch(`http://localhost/api/valuta/${payload.id}`, {
         method: 'put',
         headers: {
           'Content-Type': 'application/json'
