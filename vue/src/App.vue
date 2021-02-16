@@ -1,10 +1,10 @@
 <template>
   <div id="app">
     <b-navbar toggleable="lg" type="dark" variant="dark">
-      <b-navbar-brand href="#">Notes</b-navbar-brand>
+      <b-navbar-brand href="#">Crypto Currency Portfolio</b-navbar-brand>
       <b-navbar-nav>
         <router-link to="/">Home</router-link> |
-        <router-link to="/edit">New Message</router-link>
+        <router-link to="/edit">New Currency</router-link>
       </b-navbar-nav>
       <b-navbar-nav class="ml-auto">
         <b-nav-item>
@@ -41,7 +41,7 @@ import { isLoggedIn, login, logout } from "@/utils/auth-service";
 export default {
   name: "App",
   methods: {
-    ...mapActions(["load_messages"]),
+    ...mapActions(["load_currencies"]),
     handleLogin() {
       login();
     },
@@ -53,7 +53,7 @@ export default {
     },
   },
   mounted: function () {
-    this.load_messages();
+    this.load_currencies();
   },
 };
 </script>

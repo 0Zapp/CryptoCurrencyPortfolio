@@ -3,7 +3,7 @@
         <b-container>
             <b-row>
                 <b-col cm="6" >
-                    <EditMessage/>
+                    <EditCurrency/>
                 </b-col>
             </b-row>
         </b-container>
@@ -11,12 +11,12 @@
 </template>
 
 <script>
-    import EditMessage from "@/components/EditMessage";
+    import EditCurrency from "@/components/EditCurrency";
 
     export default {
-        name: "NewMessage",
+        name: "NewCurrency",
         components: {
-            EditMessage
+            EditCurrency
         }
     }
 </script>

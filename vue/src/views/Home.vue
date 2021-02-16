@@ -3,7 +3,7 @@
       <b-container>
           <b-row>
               <b-col cm="6" >
-                  <MessageList/>
+                  <CurrencyList/>
               </b-col>
           </b-row>
       </b-container>
@@ -12,12 +12,12 @@
 
 <script>
 // @ is an alias to /src
-import MessageList from "@/components/MessageList";
+import CurrencyList from "@/components/CurrencyList";
 
 export default {
     name: 'home',
     components: {
-        MessageList
+        CurrencyList
     }
 }
 </script>

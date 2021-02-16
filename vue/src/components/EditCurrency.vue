@@ -42,15 +42,15 @@
             this.newMessage = this.message;
         },
         methods: {
-            ...mapActions(['new_message', 'change_message']),
+            ...mapActions(['new_currency', 'change_currency']),
 
             addNew: function() {
                 const msg = JSON.stringify({user: this.newUser, message: this.newMessage});
 
                 if (!this.$route.params.id)
-                    this.new_message(msg);
+                    this.new_currency(msg);
                 else
-                    this.change_message({id: this.$route.params.id, msg: msg});
+                    this.change_currency({id: this.$route.params.id, msg: msg});
 
                 this.newUser = '';
                 this.newMessage = '';

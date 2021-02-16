@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Message from "@/views/Message";
-import NewMessage from "@/views/NewMessage";
+import NewCurrency from "@/views/NewCurrency";
 import Callback from "@/components/Callback.vue";
 
 Vue.use(VueRouter)
@@ -15,8 +15,8 @@ const routes = [
   },
   {
     path: '/edit',
-    name: 'newMessage',
-    component: NewMessage
+    name: 'newCurrency',
+    component: NewCurrency
   },
   {
     path: '/message/:id',

@@ -8,7 +8,7 @@
                 head-variant="light"
                 @row-clicked="editMessage">
             <template v-slot:cell(action)="row">
-                <b-button variant="danger" @click="delete_message(row.item.id)">Delete</b-button>
+                <b-button variant="danger" @click="delete_currency(row.item.id)">Delete</b-button>
             </template>
         </b-table>
         <h1 v-else>No messages</h1>
@@ -35,7 +35,7 @@
             }
         },
         methods: {
-            ...mapActions(['delete_message']),
+            ...mapActions(['delete_currency']),
 
             editMessage: function (item, index, event) {
                 router.push({path: `/message/${item.id}`})

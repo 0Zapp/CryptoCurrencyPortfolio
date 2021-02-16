@@ -23,7 +23,7 @@
 
 <script>
     export default {
-        name: "ShowMessage",
+        name: "ShowCurrency",
         props: {
             message: Object
         }

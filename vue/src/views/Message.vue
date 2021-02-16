@@ -4,10 +4,10 @@
             <b-row>
                 <b-col cm="6" >
                     <div v-if="edit">
-                        <EditMessage :user="message.user" :message="message.message"/>
+                        <EditCurrency :user="message.user" :message="message.message"/>
                     </div>
                     <div v-else>
-                        <ShowMessage v-if="messages.length" :message="message"/>
+                        <ShowCurrency v-if="messages.length" :message="message"/>
                     </div>
                 </b-col>
             </b-row>
@@ -21,15 +21,15 @@
 </template>
 
 <script>
-    import EditMessage from "@/components/EditMessage";
-    import ShowMessage from "@/components/ShowMessage";
+    import EditCurrency from "@/components/EditCurrency";
+    import ShowCurrency from "@/components/ShowCurrency";
     import { mapState, mapActions } from 'vuex';
 
     export default {
         name: "Message",
         components: {
-            EditMessage,
-            ShowMessage
+            EditCurrency,
+            ShowCurrency
         },
         data() {
             return {
@@ -46,7 +46,7 @@
             }
         },
         methods: {
-            ...mapActions(['load_messages']),
+            ...mapActions(['load_currencies']),
 
             toggleEdit: function () {
                 this.edit = !this.edit

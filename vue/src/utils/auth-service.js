@@ -16,27 +16,24 @@ const auth = new auth0.WebAuth({
     domain: CLIENT_DOMAIN
 });
 
-export function login() {
-    auth.authorize({
-        responseType: "token id_token",
-        redirectUri: REDIRECT,
-        audience: AUDIENCE,
-        scope: SCOPE
-    });
-}
-
-
+ export function login() {
+     auth.authorize({
+         responseType: "token id_token",
+         redirectUri: REDIRECT,
+         audience: AUDIENCE,
+         scope: SCOPE
+     });
+ }
 
 const router = new Router({
     mode: "history"
 });
-export function logout() {
-    clearIdToken();
-    clearAccessToken();
+ export function logout() {
+     clearIdToken();
+     clearAccessToken();
     // @ts-ignore
-    router.go("/");
-}
-
+     router.go("/");
+ }
 
 export function getAccessToken() {
     return localStorage.getItem(ACCESS_TOKEN_KEY);
@@ -65,12 +62,10 @@ export function setIdToken() {
     const idToken = getParameterByName("id_token");
     localStorage.setItem(ID_TOKEN_KEY, idToken);
 }
-export function isLoggedIn() {
-    const idToken = getIdToken();
-    return !!idToken && !isTokenExpired(idToken);
-}
-
-
+ export function isLoggedIn() {
+     const idToken = getIdToken();
+     return !!idToken && !isTokenExpired(idToken);
+ }
 
 function getTokenExpirationDate(encodedToken) {
     const token = decode(encodedToken);
