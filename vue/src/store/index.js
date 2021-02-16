@@ -65,6 +65,9 @@ export default new Vuex.Store({
         `Bearer ${getAccessToken()}`
       );
       fetch(`http://localhost/api/valuta/${id}`, { method: 'delete', headers}).then((response) => {
+        if(response.status == 401){
+          throw "You don't have permission";
+        }
         if (!response.ok)
           throw response;
 
@@ -85,10 +88,14 @@ export default new Vuex.Store({
       fetch('http://localhost/api/valute', {
         method: 'post',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'authorization': `Bearer ${getAccessToken()}`
         },
         body: message
       }).then((response) => {
+        if(response.status == 401){
+          throw "You don't have permission";
+        }
         if (!response.ok)
           throw response;
 
@@ -109,10 +116,14 @@ export default new Vuex.Store({
       fetch(`http://localhost/api/valuta/${payload.id}`, {
         method: 'put',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'authorization': `Bearer ${getAccessToken()}`
         },
         body: payload.msg
       }).then((response) => {
+        if(response.status == 401){
+          throw "You don't have permission";
+        }
         if (!response.ok)
           throw response;
 

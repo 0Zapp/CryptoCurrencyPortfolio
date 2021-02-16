@@ -51,7 +51,7 @@ route.get('/valute', (req, res) => {
 });
 
 // Cuvanje nove poruke (vraca korisniku ceo red iz baze)
-route.post('/valute', (req, res) => {
+route.post('/valute', authCheck, (req, res) => {
     // Validiramo podatke koje smo dobili od korisnika
     let { error } = Joi.validate(req.body, sema);  // Object decomposition - dohvatamo samo gresku
 
@@ -97,7 +97,7 @@ route.get('/valuta/:id', (req, res) => {
 });
 
 // Izmena poruke (vraca korisniku ceo red iz baze)
-route.put('/valuta/:id', (req, res) => {
+route.put('/valuta/:id', authCheck, (req, res) => {
     let { error } = Joi.validate(req.body, sema);
 
     if (error)
