@@ -9,6 +9,7 @@
                     <div v-else>
                         <ShowCurrency v-if="currencies.length" :message="message"/>
                     </div>
+                    
                 </b-col>
             </b-row>
             <b-row>
@@ -16,6 +17,10 @@
                     <b-button variant="primary" size="lg" @click="toggleEdit" v-html="edit ? 'Cancel' : 'Edit'"/>
                 </b-col>
             </b-row>
+            <label for="naziv">Transactions:</label>
+                    <div >
+                         <TransactionList />
+                    </div>
         </b-container>
     </div>
 </template>
@@ -24,12 +29,14 @@
     import EditCurrency from "@/components/EditCurrency";
     import ShowCurrency from "@/components/ShowCurrency";
     import { mapState, mapActions } from 'vuex';
+    import TransactionList from "@/components/TransactionList";
 
     export default {
         name: "Message",
         components: {
             EditCurrency,
-            ShowCurrency
+            ShowCurrency,
+            TransactionList
         },
         data() {
             return {

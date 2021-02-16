@@ -26,6 +26,7 @@
                 <p id="opis" style="text-align: left">{{ message.opis }}</p>
             </b-col>
         </b-row>
+        
     </b-container>
 </template>
 

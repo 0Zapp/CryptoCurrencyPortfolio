@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import {getAccessToken} from "@/utils/auth-service";
 
 Vue.use(Vuex);
 
@@ -58,7 +59,12 @@ export default new Vuex.Store({
     },
 
     delete_currency: function({ commit }, id) {
-      fetch(`http://localhost/api/valuta/${id}`, { method: 'delete' }).then((response) => {
+      const headers = new Headers();
+      headers.append(
+        "authorization",
+        `Bearer ${getAccessToken()}`
+      );
+      fetch(`http://localhost/api/valuta/${id}`, { method: 'delete', headers}).then((response) => {
         if (!response.ok)
           throw response;
 

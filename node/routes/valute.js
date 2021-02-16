@@ -1,6 +1,21 @@
 const express = require('express');
 const Joi = require('joi');
 const mysql = require('mysql');
+const jwt = require('express-jwt');
+const jwks = require('jwks-rsa');
+
+const authCheck = jwt({
+    secret: jwks.expressJwtSecret({
+      cache: true,
+      rateLimit: true,
+      jwksRequestsPerMinute: 5,
+      jwksUri: "https://dev-ossvsd9s.eu.auth0.com/.well-known/jwks.json"
+    }),
+    // This is the identifier we set when we created the API
+    audience: 'http://portfolio.com',
+    issuer: "https://dev-ossvsd9s.eu.auth0.com/",
+    algorithms: ['RS256']
+  });
 
 // Koristimo pool da bi automatski aquire-ovao i release-ovao konekcije
 const pool = mysql.createPool({
@@ -111,7 +126,7 @@ route.put('/valuta/:id', (req, res) => {
 });
 
 // Brisanje poruke (vraca korisniku ceo red iz baze)
-route.delete('/valuta/:id', (req, res) => {
+route.delete('/valuta/:id', authCheck, (req, res) => {
     let query = 'select * from valute where id=?';
     let formated = mysql.format(query, [req.params.id]);
 

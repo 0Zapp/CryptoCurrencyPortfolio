@@ -7,7 +7,7 @@ const ID_TOKEN_KEY = "id_token";
 const ACCESS_TOKEN_KEY = "access_token";
 const CLIENT_ID = "zwEKiFrqEmgw4QZ4QjfMQZshLeJ6kp8j";
 const CLIENT_DOMAIN = "dev-ossvsd9s.eu.auth0.com";
-const REDIRECT = "http://localhost:8080/callback";
+const REDIRECT = "http://localhost:8081/callback";
 const SCOPE = "full_access";
 const AUDIENCE = "http://portfolio.com";
 
