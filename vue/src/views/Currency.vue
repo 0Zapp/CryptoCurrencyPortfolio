@@ -4,7 +4,7 @@
             <b-row>
                 <b-col cm="6" >
                     <div v-if="edit">
-                        <EditCurrency :user="message.naziv" :message="message.opis"/>
+                        <EditCurrency :naziv="message.naziv" :tracer="message.tracer" :opis="message.opis"/>
                     </div>
                     <div v-else>
                         <ShowCurrency v-if="currencies.length" :message="message"/>
