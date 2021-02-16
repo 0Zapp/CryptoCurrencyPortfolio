@@ -12,7 +12,7 @@
 
         <b-row class="mt-2">
             <b-col sm="2">
-                <label for="msg">Message:</label>
+                <label for="msg">Currency:</label>
             </b-col>
             <b-col sm="10">
                 <p id="msg" style="text-align: left">{{ message.message }}</p>

@@ -5,32 +5,32 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    messages: []
+    currencies: []
   },
 
   mutations: {
     set_currencies: function (state, currencies) {
-      state.messages = currencies;
+      state.currencies = currencies;
     },
 
     add_currency: function (state, message) {
-      state.messages.push(message);
+      state.currencies.push(message);
     },
 
     remove_currency: function (state, id) {
-      for (let m = 0; m < state.messages.length; m++) {
-        if (state.messages[m].id === id) {
-          state.messages.splice(m, 1);
+      for (let m = 0; m < state.currencies.length; m++) {
+        if (state.currencies[m].id === id) {
+          state.currencies.splice(m, 1);
           break;
         }
       }
     },
 
     update_currency: function (state, payload) {
-      for (let m = 0; m < state.messages.length; m++) {
-        if (state.messages[m].id === parseInt(payload.id)) {
-          state.messages[m].user = payload.msg.user;
-          state.messages[m].message = payload.msg.message;
+      for (let m = 0; m < state.currencies.length; m++) {
+        if (state.currencies[m].id === parseInt(payload.id)) {
+          state.currencies[m].user = payload.msg.user;
+          state.currencies[m].message = payload.msg.message;
           break;
         }
       }

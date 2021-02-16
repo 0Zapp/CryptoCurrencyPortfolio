@@ -1,9 +1,9 @@
 <template>
     <div>
         <b-table
-                hover v-if="messages.length"
+                hover v-if="currencies.length"
                 sticky-header="800px"
-                :items="messages"
+                :items="currencies"
                 :fields="fields"
                 head-variant="light"
                 @row-clicked="editMessage">
@@ -11,7 +11,7 @@
                 <b-button variant="danger" @click="delete_currency(row.item.id)">Delete</b-button>
             </template>
         </b-table>
-        <h1 v-else>No messages</h1>
+        <h1 v-else>No currencies</h1>
     </div>
 </template>
 
@@ -22,7 +22,7 @@
     export default {
         name: "MessageList",
         computed: {
-            ...mapState(['messages'])
+            ...mapState(['currencies'])
         },
         data() {
             return {

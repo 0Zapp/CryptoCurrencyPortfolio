@@ -7,7 +7,7 @@
                         <EditCurrency :user="message.user" :message="message.message"/>
                     </div>
                     <div v-else>
-                        <ShowCurrency v-if="messages.length" :message="message"/>
+                        <ShowCurrency v-if="currencies.length" :message="message"/>
                     </div>
                 </b-col>
             </b-row>
@@ -37,12 +37,12 @@
             }
         },
         computed: {
-            ...mapState(['messages']),
+            ...mapState(['currencies']),
 
             message: function () {
-                for (let i = 0; i < this.messages.length; i++)
-                    if (this.messages[i].id === parseInt(this.$route.params.id))
-                        return this.messages[i];
+                for (let i = 0; i < this.currencies.length; i++)
+                    if (this.currencies[i].id === parseInt(this.$route.params.id))
+                        return this.currencies[i];
             }
         },
         methods: {
