@@ -6,13 +6,13 @@
       class="mb-2 mr-sm-2 mb-sm-0"
       placeholder="Bitcoin,Etherium,Dogecoin..."
     ></b-input>
-    <label for="naziv">Tracer:</label>
+    <label for="tracer">Tracer:</label>
     <b-input
       v-model="newTracer"
       class="mb-2 mr-sm-2 mb-sm-0"
       placeholder="BTC,ETC,DOGE..."
     ></b-input>
-    <label for="naziv">Opis:</label>
+    <label for="opis">Opis:</label>
     <b-form-textarea
       v-model="newOpis"
       placeholder="Bitcoin je decentralizova..."

@@ -10,7 +10,7 @@
       @row-clicked="editCurrency"
     >
     </b-table>
-    <b-button variant="primary" size="lg" @click="newTransaction">New Transaction</b-button>
+    <b-button @click="new_transaction">New Transaction</b-button>
   </div>
 </template>
 
@@ -20,13 +20,18 @@ import { mapState, mapActions } from "vuex";
 
 export default {
   name: "TransactionList",
- 
+
   computed: {
     ...mapState(["transactions"]),
   },
   data() {
     return {
-      fields: [{ key: "ammount" }, { key: "time" }, { key: "adressFrom" }, { key: "adressTo" }],
+      fields: [
+        { key: "ammount" },
+        { key: "time" },
+        { key: "adressFrom" },
+        { key: "adressTo" },
+      ],
       valutaId: "",
     };
   },
@@ -37,9 +42,9 @@ export default {
       router.push({ path: `/currency/${item.id}` });
     },
 
-    newTransaction: function(){
-        console.log("yo")
-    }
+    new_transaction: function (item, index, event) {
+      router.push({ path: `/transaction/${this.$route.params.id}`});
+    },
   },
   mounted: function () {
     this.valutaId = this.$route.params.id;

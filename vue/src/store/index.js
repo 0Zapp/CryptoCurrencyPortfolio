@@ -188,5 +188,33 @@ export default new Vuex.Store({
           alert(error);
       });
     },
+
+    new_transaction: function({ commit }, payload) {
+      fetch(`http://localhost/api/valuta/${payload.id}`, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+          'authorization': `Bearer ${getAccessToken()}`
+        },
+        body: payload.msg
+      }).then((response) => {
+        if(response.status == 401){
+          throw "You don't have permission";
+        }
+        if (!response.ok)
+          throw response;
+
+        return response.json();
+      }).then((jsonData) => {
+        commit('add_transaction', jsonData);
+      }).catch((error) => {
+        if (typeof error.text === 'function')
+          error.text().then((errorMessage) => {
+            alert(errorMessage);
+          });
+        else
+          alert(error);
+      });
+    },
   }
 })

@@ -36,6 +36,13 @@ const sema = Joi.object().keys({
     opis: Joi.string().max(512).required()
 });
 
+const transSema = Joi.object().keys({
+    from: Joi.string().trim().min(4).max(100).required(),
+    to: Joi.string().trim().min(4).max(100).required(),
+    amount: Joi.required(),
+    valutaId: Joi.required()
+});
+
 // Middleware da parsira json request-ove
 route.use(express.json());
 
@@ -83,6 +90,39 @@ route.post('/valute', authCheck, (req, res) => {
             else {
                 // Ako nema greske dohvatimo kreirani objekat iz baze i posaljemo ga korisniku
                 query = 'select * from valute where id=?';
+                formated = mysql.format(query, [response.insertId]);
+
+                pool.query(formated, (err, rows) => {
+                    if (err)
+                        res.status(500).send(err.sqlMessage);
+                    else
+                        res.send(rows[0]);
+                });
+            }
+        });
+    }
+});
+
+route.post('/valuta/:id',authCheck, (req, res) => {
+    // Validiramo podatke koje smo dobili od korisnika
+    let { error } = Joi.validate(req.body, transSema);  // Object decomposition - dohvatamo samo gresku
+    
+    // Ako su podaci neispravni prijavimo gresku
+    if (error)
+        res.status(400).send(error.details[0].message);  // Greska zahteva
+    else {  // Ako nisu upisemo ih u bazu
+        // Izgradimo SQL query string
+        let query = "insert into transakcije (adressFrom, adressTo, ammount, valutaID) values (?, ?, ?, ?)";
+        let formated = mysql.format(query, [req.body.from, req.body.to, req.body.amount, req.body.valutaId]);
+
+        // Izvrsimo query
+        pool.query(formated, (err, response) => {
+            if (err){
+                res.status(500).send(err.sqlMessage);
+                
+            }else {
+                // Ako nema greske dohvatimo kreirani objekat iz baze i posaljemo ga korisniku
+                query = 'select * from transakcije where id=?';
                 formated = mysql.format(query, [response.insertId]);
 
                 pool.query(formated, (err, rows) => {
