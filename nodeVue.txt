@@ -1,0 +1,76 @@
+npm init u folderu inicijalizuje node projekat u tom folderu
+npm install express, express se instalira lokalno, web framework za js node.
+npm install joy, za validaciju
+npm install mysql
+
+mozes direktno da izvrsis neki fajl tako sto kazes "node cb.js"
+
+expres je mini web server
+node app.js pokrenuce server
+npm install nodemon
+nodemon app.js
+
+odes na bootstrap sajt, introduction i pokupis css style sheet, nabijes u head
+onda odes u components i prekopiras sta ti odgovara
+da ti ne bi bilo ful rasireno zaklopis deo u bodiju sa
+
+<div class="container">
+
+</div>
+hrefove menjas gde hoces da gadjaju
+
+body parser prepoznaje preko mejla
+
+odes u mysql workbench i udaris file run sql script
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password' u mysl bench
+
+npm install -g @vue/cli
+
+u folderu udaris vue create poruke
+trebao bi manually select features ( u vezbi sest koristi vue 2)
+
+najlakse da ukljucis bootstrapVue
+
+da bni instalirali bootstrap udaris umutar vue rojet folder gore npr poruke, unutar njega udaris 
+npm install bootstrap-vue bootstrap
+
+unutar cd poruke mozes isto:
+isto unutar vue package.json:
+"rules": {
+      "no-console": 0
+    },
+i prekopiras sa bootstrapvue sajta 
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+i stavis unutar heada kod ostalih meta tagova u indexu
+
+u vue fajlu mozes npm run serve (ako ne radi probaj prvo npm install, pa onda npm serve)(probaj
+da obrises node_modules fajl, pa onda npm i, pre nego npm run serve)
+
+deo u using module bundlers na sajtu bootstrap vue pokupis:
+
+import { BootstrapVue} from 'bootstrap-vue'
+
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+Vue.use(BootstrapVue)
+to ide u main
+
+tu mozemo da pokupimo komponente
+
+npm install connect-history-api-fallback
+1:48:00 na 7moj
+
+ako hocemo da prikazemo iz noda ODEMO u vueo deo i kazemo npm run build
+imamo dist direktorijum, izprekopiramo dist u node folder
+
+sada pokrenemo node i odemo samo na localhost i to je to
+
+auth0---------------------------
+fronty
+npm install auth0-js
+npm install jwt-decode
+backy
+npm install express-jwt
+npm install jwks-rsa

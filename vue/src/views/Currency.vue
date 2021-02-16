@@ -4,7 +4,7 @@
             <b-row>
                 <b-col cm="6" >
                     <div v-if="edit">
-                        <EditCurrency :naziv="message.naziv" :tracer="message.tracer" :opis="message.opis" />
+                        <EditCurrency :name="message.name" :description="message.description" />
                     </div>
                     <div v-else>
                         <ShowCurrency v-if="currencies.length" :message="message"/>
@@ -17,7 +17,7 @@
                     <b-button variant="primary" size="lg" @click="toggleEdit" v-html="edit ? 'Cancel' : 'Edit'"/>
                 </b-col>
             </b-row>
-            <label for="naziv">Transactions:</label>
+            <label for="name">Transactions:</label>
                     <div >
                          <TransactionList/>
                     </div>

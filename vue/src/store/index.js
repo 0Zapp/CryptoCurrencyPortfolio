@@ -31,9 +31,8 @@ export default new Vuex.Store({
     update_currency: function (state, payload) {
       for (let m = 0; m < state.currencies.length; m++) {
         if (state.currencies[m].id === parseInt(payload.id)) {
-          state.currencies[m].naziv = payload.msg.naziv;
-          state.currencies[m].tracer = payload.msg.tracer;
-          state.currencies[m].opis = payload.msg.opis;
+          state.currencies[m].name = payload.msg.name;
+          state.currencies[m].description = payload.msg.description;
           break;
         }
       }

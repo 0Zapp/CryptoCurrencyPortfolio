@@ -7,7 +7,6 @@
       :items="transactions"
       :fields="fields"
       head-variant="light"
-      @row-clicked="editCurrency"
     >
     </b-table>
     <b-button @click="new_transaction">New Transaction</b-button>
@@ -27,8 +26,8 @@ export default {
   data() {
     return {
       fields: [
-        { key: "ammount" },
-        { key: "time" },
+        { key: "amount" },
+        { key: "created_at" },
         { key: "adressFrom" },
         { key: "adressTo" },
       ],

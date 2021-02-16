@@ -23,7 +23,7 @@ const pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
     password: 'password',
-    database: 'portfoliodb'
+    database: 'portfolio'
 });
 
 // Instanciramo ruter
@@ -31,9 +31,8 @@ const route = express.Router();
 
 // Sema za validaciju
 const sema = Joi.object().keys({
-    naziv: Joi.string().trim().min(4).max(12).required(),
-    tracer: Joi.string().trim().min(2).max(12).required(),
-    opis: Joi.string().max(512).required()
+    name: Joi.string().trim().min(4).max(12).required(),
+    description: Joi.string().max(512).required()
 });
 
 const transSema = Joi.object().keys({
@@ -47,7 +46,7 @@ const transSema = Joi.object().keys({
 route.use(express.json());
 
 route.get('/valuta/:id/transactions', (req, res) => {
-    query = 'select * from transakcije where valutaid=?';
+    query = 'select * from portfolio_transaction where currency_id=?';
     let formated = mysql.format(query, [req.params.id]);
      pool.query(formated, (err, rows) => {
          if (err)
@@ -60,7 +59,7 @@ route.get('/valuta/:id/transactions', (req, res) => {
 // Prikaz svih poruka
 route.get('/valute', (req, res) => {
     // Saljemo upit bazi
-    pool.query('select * from valute', (err, rows) => {
+    pool.query('select * from portfolio_currency', (err, rows) => {
         if (err)
             res.status(500).send(err.sqlMessage);  // Greska servera
         else
@@ -80,8 +79,8 @@ route.post('/valute', authCheck, (req, res) => {
         res.status(400).send(error.details[0].message);  // Greska zahteva
     else {  // Ako nisu upisemo ih u bazu
         // Izgradimo SQL query string
-        let query = "insert into valute (naziv, tracer, opis) values (?, ?, ?)";
-        let formated = mysql.format(query, [req.body.naziv, req.body.tracer, req.body.opis]);
+        let query = "insert into portfolio_currency (name, description) values (?, ?)";
+        let formated = mysql.format(query, [req.body.name, req.body.description]);
 
         // Izvrsimo query
         pool.query(formated, (err, response) => {
@@ -89,7 +88,7 @@ route.post('/valute', authCheck, (req, res) => {
                 res.status(500).send(err.sqlMessage);
             else {
                 // Ako nema greske dohvatimo kreirani objekat iz baze i posaljemo ga korisniku
-                query = 'select * from valute where id=?';
+                query = 'select * from portfolio_currency where id=?';
                 formated = mysql.format(query, [response.insertId]);
 
                 pool.query(formated, (err, rows) => {
@@ -112,7 +111,7 @@ route.post('/valuta/:id',authCheck, (req, res) => {
         res.status(400).send(error.details[0].message);  // Greska zahteva
     else {  // Ako nisu upisemo ih u bazu
         // Izgradimo SQL query string
-        let query = "insert into transakcije (adressFrom, adressTo, ammount, valutaID) values (?, ?, ?, ?)";
+        let query = "insert into portfolio_transaction (adressFrom, adressTo, amount, currency_id) values (?, ?, ?, ?)";
         let formated = mysql.format(query, [req.body.from, req.body.to, req.body.amount, req.body.valutaId]);
 
         // Izvrsimo query
@@ -122,7 +121,7 @@ route.post('/valuta/:id',authCheck, (req, res) => {
                 
             }else {
                 // Ako nema greske dohvatimo kreirani objekat iz baze i posaljemo ga korisniku
-                query = 'select * from transakcije where id=?';
+                query = 'select * from portfolio_transaction where id=?';
                 formated = mysql.format(query, [response.insertId]);
 
                 pool.query(formated, (err, rows) => {
@@ -138,7 +137,7 @@ route.post('/valuta/:id',authCheck, (req, res) => {
 
 // Prikaz pojedinacne poruke
 route.get('/valuta/:id', (req, res) => {
-    let query = 'select * from valute where id=?';
+    let query = 'select * from portfolio_currency where id=?';
     let formated = mysql.format(query, [req.params.id]);
 
     pool.query(formated, (err, rows) => {
@@ -156,14 +155,14 @@ route.put('/valuta/:id', authCheck, (req, res) => {
     if (error)
         res.status(400).send(error.details[0].message);
     else {
-        let query = "update valute set naziv=?, tracer=?, opis=? where id=?";
-        let formated = mysql.format(query, [req.body.naziv, req.body.tracer, req.body.opis, req.params.id]);
+        let query = "update portfolio_currency set name=?, description=? where id=?";
+        let formated = mysql.format(query, [req.body.name, req.body.description, req.params.id]);
 
         pool.query(formated, (err, response) => {
             if (err)
                 res.status(500).send(err.sqlMessage);
             else {
-                query = 'select * from valute where id=?';
+                query = 'select * from portfolio_currency where id=?';
                 formated = mysql.format(query, [req.params.id]);
 
                 pool.query(formated, (err, rows) => {
@@ -180,7 +179,7 @@ route.put('/valuta/:id', authCheck, (req, res) => {
 
 // Brisanje poruke (vraca korisniku ceo red iz baze)
 route.delete('/valuta/:id', authCheck, (req, res) => {
-    let query = 'select * from valute where id=?';
+    let query = 'select * from portfolio_currency where id=?';
     let formated = mysql.format(query, [req.params.id]);
 
     pool.query(formated, (err, rows) => {
@@ -189,7 +188,7 @@ route.delete('/valuta/:id', authCheck, (req, res) => {
         else {
             let valuta = rows[0];
 
-            let query = 'delete from valute where id=?';
+            let query = 'delete from portfolio_currency where id=?';
             let formated = mysql.format(query, [req.params.id]);
 
             pool.query(formated, (err, rows) => {

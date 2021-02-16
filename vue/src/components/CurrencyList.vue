@@ -27,9 +27,9 @@
         data() {
             return {
                 fields: [
-                    { key: 'naziv' },
-                    { key: 'tracer' },
-                    { key: 'opis' },
+                    { key: 'name' },
+                    { key: 'description' },
+                    { key: 'created_at' },
                     { key: 'action' }
                 ]
             }

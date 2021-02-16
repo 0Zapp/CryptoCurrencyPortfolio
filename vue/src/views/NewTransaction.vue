@@ -1,10 +1,10 @@
 <template>
   <b-container fluid>
-    <label for="naziv">Address from:</label>
+    <label for="name">Address from:</label>
     <b-input v-model="newFrom" class="mb-2 mr-sm-2 mb-sm-0"></b-input>
-    <label for="tracer">Address to:</label>
+    <label for="to">Address to:</label>
     <b-input v-model="newTo" class="mb-2 mr-sm-2 mb-sm-0"></b-input>
-    <label for="opis">Amount:</label>
+    <label for="description">Amount:</label>
     <b-input v-model="newAmount"></b-input>
     <b-button variant="primary" size="lg" @click="addNew"
       >Add Transaction</b-button

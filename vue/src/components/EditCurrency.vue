@@ -1,20 +1,14 @@
 <template>
   <b-container fluid>
-    <label for="naziv">Naziv:</label>
+    <label for="name">name:</label>
     <b-input
-      v-model="newNaziv"
+      v-model="newName"
       class="mb-2 mr-sm-2 mb-sm-0"
       placeholder="Bitcoin,Etherium,Dogecoin..."
     ></b-input>
-    <label for="tracer">Tracer:</label>
-    <b-input
-      v-model="newTracer"
-      class="mb-2 mr-sm-2 mb-sm-0"
-      placeholder="BTC,ETC,DOGE..."
-    ></b-input>
-    <label for="opis">Opis:</label>
+    <label for="description">Description:</label>
     <b-form-textarea
-      v-model="newOpis"
+      v-model="newDescription"
       placeholder="Bitcoin je decentralizova..."
     ></b-form-textarea>
 
@@ -29,24 +23,19 @@ import router from "@/router";
 export default {
   name: "EditMessage",
   props: {
-    naziv: {
+    name: {
       type: String,
       default: "",
     },
-    tracer: {
-      type: String,
-      default: "",
-    },
-    opis: {
+    description: {
       type: String,
       default: "",
     },
   },
   data() {
     return {
-      newNaziv: "",
-      newTracer: "",
-      newOpis: "",
+      newName: "",
+      newDescription: "",
     };
   },
   
@@ -55,25 +44,22 @@ export default {
 
     addNew: function () {
       const msg = JSON.stringify({
-        naziv: this.newNaziv,
-        tracer: this.newTracer,
-        opis: this.newOpis,
+        name: this.newName,
+        description: this.newDescription,
       });
 
       if (!this.$route.params.id) this.new_currency(msg);
       else this.change_currency({ id: this.$route.params.id, msg: msg });
 
-      this.newNaziv = "";
-      this.newTracer = "";
-      this.newOpis = "";
+      this.newName = "";
+      this.newDescription = "";
 
       router.push({path: `/`})
     },
   },
   mounted: function () {
-    this.newNaziv = this.naziv;
-    this.newTracer = this.tracer;
-    this.newOpis = this.opis;
+    this.newName = this.name;
+    this.newDescription = this.description;
   },
 };
 </script>
