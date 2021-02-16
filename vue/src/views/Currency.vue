@@ -4,7 +4,7 @@
             <b-row>
                 <b-col cm="6" >
                     <div v-if="edit">
-                        <EditCurrency :naziv="message.naziv" :tracer="message.tracer" :opis="message.opis"/>
+                        <EditCurrency :naziv="message.naziv" :tracer="message.tracer" :opis="message.opis" />
                     </div>
                     <div v-else>
                         <ShowCurrency v-if="currencies.length" :message="message"/>
@@ -19,7 +19,7 @@
             </b-row>
             <label for="naziv">Transactions:</label>
                     <div >
-                         <TransactionList />
+                         <TransactionList/>
                     </div>
         </b-container>
     </div>
@@ -45,6 +45,7 @@
         },
         computed: {
             ...mapState(['currencies']),
+
 
             message: function () {
                 for (let i = 0; i < this.currencies.length; i++)

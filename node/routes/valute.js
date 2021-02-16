@@ -39,6 +39,17 @@ const sema = Joi.object().keys({
 // Middleware da parsira json request-ove
 route.use(express.json());
 
+route.get('/valuta/:id/transactions', (req, res) => {
+    query = 'select * from transakcije where valutaid=?';
+    let formated = mysql.format(query, [req.params.id]);
+     pool.query(formated, (err, rows) => {
+         if (err)
+             res.status(500).send(err.sqlMessage);  // Greska servera
+         else
+             res.send(rows);
+     });
+ });
+
 // Prikaz svih poruka
 route.get('/valute', (req, res) => {
     // Saljemo upit bazi
@@ -49,6 +60,8 @@ route.get('/valute', (req, res) => {
             res.send(rows);
     });
 });
+
+
 
 // Cuvanje nove poruke (vraca korisniku ceo red iz baze)
 route.post('/valute', authCheck, (req, res) => {

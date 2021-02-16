@@ -1,51 +1,55 @@
 <template>
-    <div>
-        <b-table
-                hover v-if="currencies.length"
-                sticky-header="800px"
-                :items="currencies"
-                :fields="fields"
-                head-variant="light"
-                @row-clicked="editCurrency">
-            <template v-slot:cell(action)="row">
-                <b-button variant="danger" @click="delete_currency(row.item.id)">Delete</b-button>
-            </template>
-        </b-table>
-        <h1 v-else>No currencies</h1>
-    </div>
+  <div>
+    <b-table
+      hover
+      v-if="transactions.length"
+      sticky-header="800px"
+      :items="transactions"
+      :fields="fields"
+      head-variant="light"
+      @row-clicked="editCurrency"
+    >
+    </b-table>
+    <b-button variant="primary" size="lg" @click="newTransaction">New Transaction</b-button>
+  </div>
 </template>
 
 <script>
-    import router from "@/router";
-    import { mapState, mapActions } from 'vuex';
+import router from "@/router";
+import { mapState, mapActions } from "vuex";
 
-    export default {
-        name: "CurrencyList",
-        computed: {
-            ...mapState(['currencies'])
-        },
-        data() {
-            return {
-                fields: [
-                    { key: 'naziv' },
-                    { key: 'tracer' },
-                    { key: 'opis' },
-                    { key: 'action' }
-                ]
-            }
-        },
-        methods: {
-            ...mapActions(['delete_currency']),
+export default {
+  name: "TransactionList",
+ 
+  computed: {
+    ...mapState(["transactions"]),
+  },
+  data() {
+    return {
+      fields: [{ key: "ammount" }, { key: "time" }, { key: "adressFrom" }, { key: "adressTo" }],
+      valutaId: "",
+    };
+  },
+  methods: {
+    ...mapActions(["delete_currency", "load_transactions"]),
 
-            editCurrency: function (item, index, event) {
-                router.push({path: `/currency/${item.id}`})
-            }
-        }
+    editCurrency: function (item, index, event) {
+      router.push({ path: `/currency/${item.id}` });
+    },
+
+    newTransaction: function(){
+        console.log("yo")
     }
+  },
+  mounted: function () {
+    this.valutaId = this.$route.params.id;
+    this.load_transactions(this.valutaId);
+  },
+};
 </script>
 
 <style>
-    tr:hover td{
-        background: lightgreen;
-    }
+tr:hover td {
+  background: lightgreen;
+}
 </style>

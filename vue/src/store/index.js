@@ -6,7 +6,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    currencies: []
+    currencies: [],
+    transactions: []
   },
 
   mutations: {
@@ -36,8 +37,37 @@ export default new Vuex.Store({
           break;
         }
       }
+    },
+
+    set_transactions: function (state, transactions) {
+      state.transactions = transactions;
+    },
+
+    add_transaction: function (state, message) {
+      state.transactions.push(message);
+    },
+
+    remove_transaction: function (state, id) {
+      for (let m = 0; m < state.transactions.length; m++) {
+        if (state.transactions[m].id === id) {
+          state.transactions.splice(m, 1);
+          break;
+        }
+      }
+    },
+
+    update_transaction: function (state, payload) {
+      for (let m = 0; m < state.transactions.length; m++) {
+        if (state.transactions[m].id === parseInt(payload.id)) {
+          state.transactions[m].adressFrom = payload.msg.adressFrom;
+          state.transactions[m].adressTo = payload.msg.adressTo;
+          state.transactions[m].ammount = payload.msg.ammount;
+          break;
+        }
+      }
     }
   },
+
 
   actions: {
     load_currencies: function ({ commit }) {
@@ -138,6 +168,25 @@ export default new Vuex.Store({
         else
           alert(error);
       });
-    }
+    },
+
+    load_transactions: function ({ commit },id)  {
+     // fetch('http://localhost/api/valute', { method: 'get' }).then((response) => {
+      fetch(`http://localhost/api/valuta/${id}/transactions`, { method: 'get' }).then((response) => {
+        if (!response.ok)
+          throw response;
+
+        return response.json()
+      }).then((jsonData) => {
+        commit('set_transactions', jsonData)
+      }).catch((error) => {
+        if (typeof error.text === 'function')
+          error.text().then((errorMessage) => {
+            alert(errorMessage);
+          });
+        else
+          alert(error);
+      });
+    },
   }
 })

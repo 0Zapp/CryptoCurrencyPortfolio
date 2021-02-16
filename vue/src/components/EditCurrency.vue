@@ -49,11 +49,7 @@ export default {
       newOpis: "",
     };
   },
-  mounted: function () {
-    this.newNaziv = this.naziv;
-    this.newTracer = this.tracer;
-    this.newOpis = this.opis;
-  },
+  
   methods: {
     ...mapActions(["new_currency", "change_currency"]),
 
@@ -73,6 +69,11 @@ export default {
 
       router.push({path: `/`})
     },
+  },
+  mounted: function () {
+    this.newNaziv = this.naziv;
+    this.newTracer = this.tracer;
+    this.newOpis = this.opis;
   },
 };
 </script>
